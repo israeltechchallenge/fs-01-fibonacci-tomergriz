@@ -11,13 +11,24 @@
 </head>
 
 <body>
+    <!-- <style>
+        * {
+            border: 1px solid black;
+        }
+    </style> -->
 
     <div class="container">
         <p class="h1 mt-5">Fibonacci Calculator</p>
-        The Fibonacci of
-        <input type="text" id="inputNum" value="#">
-        <button id="button" class="btn btn-primary">is</button>
-        <div class="d-inline" id="result"></div>
+
+        <div class="d-flex align-items-center my-5">
+
+            <p class="pt-3 align-item-center">The Fibonnaci Of</p>
+            <input type="text" class="mx-2" size="1" id="inputNum" placeholder="#">
+            <button id="button" class="btn btn-primary ">is</button>
+            <span id="result" class="mx-2"><u><strong></strong></u></span>
+            <div class="spinner-border d-none mx-2" id="spinner"></div>
+
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
