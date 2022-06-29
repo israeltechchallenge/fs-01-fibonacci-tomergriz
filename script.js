@@ -1,4 +1,3 @@
-
 window.onload = listOnLoad;
 
 function listOnLoad() {
@@ -6,8 +5,6 @@ function listOnLoad() {
 
     fetch(url).then(response => {
         response.json().then(data => {
-
-
             data.results.sort(function (a, b) {
                 return b.createdDate - a.createdDate
             });
@@ -15,21 +12,24 @@ function listOnLoad() {
             for (let i = 0; i < 3; i++) {
                 document.getElementById("list").innerHTML += `<li class="border-dark border-bottom mb-3 pb-2">The Fibonacci Of <b>${data.results[i].number}</b> is <b>${data.results[i].result}</b> Calculated at: ${new Date(data.results[i].createdDate)}</li>`;
             }
-
         });
     });
 }
 
+let outPut = document.getElementById("outPut");
+let spinner = document.getElementById("spinner");
+let input = document.getElementById('inputNum');
+let largerFifty = document.getElementById('largerFifty')
 
 // Get the inputNum x
 document.getElementById("button").addEventListener("click", () => {
 
-    document.getElementById("result").classList.remove("border");
-    document.getElementById("result").classList.remove("text-danger");
-    document.getElementById("result").classList.add("d-none");
-    document.getElementById("spinner").classList.remove("d-none");
-    document.getElementById('largerFifty').classList.add("visually-hidden");
-    document.getElementById('inputNum').classList.remove("inputNumRed");
+    outPut.classList.remove("border");
+    outPut.classList.remove("text-danger");
+    outPut.classList.add("d-none");
+    spinner.classList.remove("d-none");
+    largerFifty.classList.add("visually-hidden");
+    input.classList.remove("inputNumRed");
 
 
     var x = document.getElementById("inputNum").value;
@@ -38,33 +38,34 @@ document.getElementById("button").addEventListener("click", () => {
     if (x > 50) { // InputNum x More then 50
 
 
-        document.getElementById("spinner").classList.add("d-none");
-        document.getElementById('largerFifty').classList.remove("visually-hidden");
-        document.getElementById('inputNum').classList.add("inputNumRed");
-        
+        spinner.classList.add("d-none");
+        largerFifty.classList.remove("visually-hidden");
+        input.classList.add("inputNumRed");
+
 
     } else {
 
         fetch(`http://localhost:5050/fibonacci/${x}`).then(response => {
             if (!response.ok) { //Server Error
 
-                document.getElementById("result").classList.remove("d-none");
-                document.getElementById("spinner").classList.add("d-none");
-                document.getElementById("result").classList.add("text-danger");
-                document.getElementById('largerFifty').classList.add("visually-hidden");
-                document.getElementById('inputNum').classList.remove("inputNumRed");
+                outPut.classList.remove("d-none");
+                spinner.classList.add("d-none");
+                outPut.classList.add("text-danger");
+                largerFifty.classList.add("visually-hidden");
+                input.classList.remove("inputNumRed");
 
-
-                document.getElementById("result").innerHTML = `Server Error: 42 is the meaning of life`;
-
+                response.text().then((errorText) => {
+                    outPut.innerHTML = `Server Error: ${errorText}`;
+                })
             }
+            
             response.json().then(data => { // inputNum ok getting results
 
-                document.getElementById("result").classList.remove("d-none");
-                document.getElementById("spinner").classList.add("d-none");
-                document.getElementById('largerFifty').classList.add("visually-hidden");
+                outPut.classList.remove("d-none");
+                spinner.classList.add("d-none");
+                largerFifty.classList.add("visually-hidden");
 
-                document.getElementById("result").innerHTML = data.result;
+                outPut.innerHTML = data.result;
 
 
             });
