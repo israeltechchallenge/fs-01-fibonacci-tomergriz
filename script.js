@@ -19,10 +19,25 @@ function listOnLoad() {
 let outPut = document.getElementById("outPut");
 let spinner = document.getElementById("spinner");
 let input = document.getElementById('inputNum');
-let largerFifty = document.getElementById('largerFifty')
+let largerFifty = document.getElementById('largerFifty');
+let checkBox = document.getElementById('checkBox');
+
+function Fibonacci(x) {
+    outPut.classList.remove("d-none");
+    spinner.classList.add("d-none");
+    largerFifty.classList.add("visually-hidden");
+
+    let i;
+    let fib = [0, 1];
+    for (i = 2; i <= x; i++) {
+        fib[i] = fib[i - 2] + fib[i - 1];
+    }
+    return fib[x];
+}
 
 // Get the inputNum x
 document.getElementById("button").addEventListener("click", () => {
+
 
     outPut.classList.remove("border");
     outPut.classList.remove("text-danger");
@@ -31,45 +46,54 @@ document.getElementById("button").addEventListener("click", () => {
     largerFifty.classList.add("visually-hidden");
     input.classList.remove("inputNumRed");
 
-
     var x = document.getElementById("inputNum").value;
 
-
     if (x > 50) { // InputNum x More then 50
-
 
         spinner.classList.add("d-none");
         largerFifty.classList.remove("visually-hidden");
         input.classList.add("inputNumRed");
+    } else if (x < 0) {  // InputNum x Negative Number
+        
+        spinner.classList.add("d-none");
+        input.classList.add("inputNumRed");
+
+    }   
+    
+    else {
+
+        if (!checkBox.checked) {
+            outPut.innerHTML = Fibonacci(x); // manual calculation
+        } else {
 
 
-    } else {
 
-        fetch(`http://localhost:5050/fibonacci/${x}`).then(response => {
-            if (!response.ok) { //Server Error
+            fetch(`http://localhost:5050/fibonacci/${x}`).then(response => {
+                if (!response.ok) { //Server Error
 
-                outPut.classList.remove("d-none");
-                spinner.classList.add("d-none");
-                outPut.classList.add("text-danger");
-                largerFifty.classList.add("visually-hidden");
-                input.classList.remove("inputNumRed");
+                    outPut.classList.remove("d-none");
+                    spinner.classList.add("d-none");
+                    outPut.classList.add("text-danger");
+                    largerFifty.classList.add("visually-hidden");
+                    input.classList.remove("inputNumRed");
 
-                response.text().then((errorText) => {
-                    outPut.innerHTML = `Server Error: ${errorText}`;
-                })
-            }
-            
-            response.json().then(data => { // inputNum ok getting results
+                    response.text().then((errorText) => {
+                        outPut.innerHTML = `Server Error: ${errorText}`;
+                    })
+                }
 
-                outPut.classList.remove("d-none");
-                spinner.classList.add("d-none");
-                largerFifty.classList.add("visually-hidden");
+                response.json().then(data => { // inputNum ok getting results
 
-                outPut.innerHTML = data.result;
+                    outPut.classList.remove("d-none");
+                    spinner.classList.add("d-none");
+                    largerFifty.classList.add("visually-hidden");
+
+                    outPut.innerHTML = data.result;
 
 
+                });
             });
-        });
+        }
         listOnLoad();
     }
 
