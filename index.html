@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Fibonacci</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <p class="h1 mt-5">Fibonacci Calculator</p>
+
+        <div class="d-flex align-items-center mt-4">
+
+            <p class="pt-3 align-item-center">The Fibonacci Of</p>
+            <input type="text" class="inputNum mx-2" size="1" id="inputNum" placeholder="#">
+            <button id="button" class="btn btn-primary ">is</button>
+            <span id="outPut" class="mx-2"><u><strong></strong></u></span>
+            <div class="spinner-border d-none mx-2" id="spinner"></div>
+        </div>
+        <div class="h-20 d-inline-block ">
+            <div id="largerFifty" class="largerFifty visually-hidden">Can’t be larger than 50</div>
+        </div>
+        <div class="d-flex row list-style: none">
+        </div>
+        <label for="checkBox">Save Calculation
+            <input type="checkbox" id="checkBox"></label>
+        <p class="h1 my-5">Result</p>
+        <ul id="list" class="list-unstyled"></ul>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
